@@ -8,6 +8,6 @@ import lombok.Getter;
 public class AdventOfCodeResponse {
     private int year;
     private int day;
-    private String part;
+    private int part;
     private Object result;
 }
