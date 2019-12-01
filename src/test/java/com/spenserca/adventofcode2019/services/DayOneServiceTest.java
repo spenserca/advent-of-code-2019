@@ -64,4 +64,41 @@ public class DayOneServiceTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void recursivelyCalculateFuelRequirement_CalledWith14_Returns2() {
+        int expected = 2;
+
+        int actual = underTest.recursivelyCalculateFuelRequirement(14);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void recursivelyCalculateFuelRequirement_CalledWith1969_Returns966() {
+        int expected = 966;
+
+        int actual = underTest.recursivelyCalculateFuelRequirement(1969);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void recursivelyCalculateFuelRequirement_CalledWith100756_Returns50346() {
+        int expected = 50346;
+
+        int actual = underTest.recursivelyCalculateFuelRequirement(100756);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void recursivelyCalculateFuelRequirement_CalledWithListOfStringMasses_Returns50346() {
+        List<String> masses = Collections.singletonList("100756");
+        int expected = 50346;
+
+        int actual = underTest.recursivelyCalculateFuelRequirement(masses);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }

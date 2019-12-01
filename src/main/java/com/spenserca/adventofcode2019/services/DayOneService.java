@@ -6,11 +6,30 @@ import java.util.List;
 
 @Component
 public class DayOneService {
+    public int recursivelyCalculateFuelRequirement(List<String> masses) {
+        return masses
+                .stream()
+                .mapToInt(Integer::valueOf)
+                .map((m) -> recursivelyCalculateFuelRequirement(m))
+                .sum();
+    }
+
+    public int recursivelyCalculateFuelRequirement(int mass) {
+        int totalFuelRequirement = 0;
+
+        while (calculateFuelRequirement(mass) > 0) {
+            totalFuelRequirement += calculateFuelRequirement(mass);
+            mass = calculateFuelRequirement(mass);
+        }
+
+        return totalFuelRequirement;
+    }
+
     public int calculateFuelRequirement(List<String> masses) {
         return masses
                 .stream()
                 .mapToInt(Integer::valueOf)
-                .map((i) -> calculateFuelRequirement(i))
+                .map((m) -> calculateFuelRequirement(m))
                 .sum();
     }
 

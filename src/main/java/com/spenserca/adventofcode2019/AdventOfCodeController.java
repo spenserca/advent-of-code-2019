@@ -43,6 +43,8 @@ public class AdventOfCodeController {
         if (day == 1) {
             if (part == 1) {
                 result = dayOneService.calculateFuelRequirement(input);
+            } else if (part == 2) {
+                result = dayOneService.recursivelyCalculateFuelRequirement(input);
             }
         }
 
