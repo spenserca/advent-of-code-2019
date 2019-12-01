@@ -23,7 +23,7 @@ class AdventOfCodeControllerTest {
 
     @BeforeAll
     public void setup() throws IOException {
-        when(mockDayOneService.calculateFuelRequirement(anyInt()))
+        when(mockDayOneService.calculateFuelRequirement(anyList()))
                 .thenReturn(new Random().nextInt());
         when(mockInputResourceService.getInputForDay(anyInt()))
                 .thenReturn(Collections.singletonList(RandomString.make(8)));
