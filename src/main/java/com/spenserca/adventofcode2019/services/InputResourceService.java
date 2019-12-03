@@ -22,6 +22,8 @@ public class InputResourceService {
         switch (day) {
             case 1:
                 return "day01.txt";
+            case 2:
+                return "day02.txt";
             default:
                 return "";
         }

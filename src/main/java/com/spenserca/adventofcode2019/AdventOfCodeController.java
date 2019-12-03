@@ -2,6 +2,7 @@ package com.spenserca.adventofcode2019;
 
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
 import com.spenserca.adventofcode2019.services.DayOneService;
+import com.spenserca.adventofcode2019.services.DayTwoService;
 import com.spenserca.adventofcode2019.services.InputResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +15,17 @@ import java.util.List;
 @RestController
 public class AdventOfCodeController {
     private DayOneService dayOneService;
+    private DayTwoService dayTwoService;
     private InputResourceService inputResourceService;
 
     @Autowired
     public AdventOfCodeController(
             DayOneService dayOneService,
+            DayTwoService dayTwoService,
             InputResourceService inputResourceService
     ) {
         this.dayOneService = dayOneService;
+        this.dayTwoService = dayTwoService;
         this.inputResourceService = inputResourceService;
     }
 
@@ -45,6 +49,11 @@ public class AdventOfCodeController {
                 result = dayOneService.calculateFuelRequirement(input);
             } else if (part == 2) {
                 result = dayOneService.recursivelyCalculateFuelRequirement(input);
+            }
+        }
+        if (day == 2) {
+            if (part == 1) {
+                result = dayTwoService.runIntCodeProgram(input.get(0));
             }
         }
 
