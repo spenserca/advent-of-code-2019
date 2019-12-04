@@ -6,30 +6,32 @@ import java.util.Arrays;
 
 @Component
 public class DayTwoService {
-    public int runIntCodeProgram(String program) {
-        int[] opCodes = Arrays.stream(program.split(","))
+    public int runIntCodeProgram(String initialMemoryState, int noun, int verb) {
+        int[] addresses = Arrays.stream(initialMemoryState.split(","))
                 .mapToInt(Integer::valueOf)
                 .toArray();
-        int currentPosition = 0;
-        int opCode = opCodes[currentPosition];
+        addresses[1] = noun;
+        addresses[2] = verb;
+        int instructionPointer = 0;
+        int opCode = addresses[instructionPointer];
 
 
         while (opCode != 99) {
-            int positionOne = opCodes[currentPosition + 1];
-            int positionTwo = opCodes[currentPosition + 2];
-            int storePosition = opCodes[currentPosition + 3];
+            int parameterOne = addresses[instructionPointer + 1];
+            int parameterTwo = addresses[instructionPointer + 2];
+            int parameterThree = addresses[instructionPointer + 3];
 
             if (opCode == 1) {
-                opCodes[storePosition] = opCodes[positionOne] + opCodes[positionTwo];
+                addresses[parameterThree] = addresses[parameterOne] + addresses[parameterTwo];
             } else if (opCode == 2) {
-                opCodes[storePosition] = opCodes[positionOne] * opCodes[positionTwo];
+                addresses[parameterThree] = addresses[parameterOne] * addresses[parameterTwo];
             }
 
-            currentPosition += 4;
-            opCode = opCodes[currentPosition];
+            instructionPointer += 4;
+            opCode = addresses[instructionPointer];
         }
 
 
-        return opCodes[0];
+        return addresses[0];
     }
 }

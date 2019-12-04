@@ -53,7 +53,9 @@ public class AdventOfCodeController {
         }
         if (day == 2) {
             if (part == 1) {
-                result = dayTwoService.runIntCodeProgram(input.get(0));
+                int noun = 12;
+                int verb = 2;
+                result = dayTwoService.runIntCodeProgram(input.get(0), noun, verb);
             }
         }
 
