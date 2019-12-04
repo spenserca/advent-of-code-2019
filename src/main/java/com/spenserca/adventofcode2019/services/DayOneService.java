@@ -10,7 +10,7 @@ public class DayOneService {
         return masses
                 .stream()
                 .mapToInt(Integer::valueOf)
-                .map((m) -> recursivelyCalculateFuelRequirement(m))
+                .map(this::recursivelyCalculateFuelRequirement)
                 .sum();
     }
 
@@ -18,7 +18,7 @@ public class DayOneService {
         return masses
                 .stream()
                 .mapToInt(Integer::valueOf)
-                .map((m) -> calculateFuelRequirement(m))
+                .map(this::calculateFuelRequirement)
                 .sum();
     }
 
