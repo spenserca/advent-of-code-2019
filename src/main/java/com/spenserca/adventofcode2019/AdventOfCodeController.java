@@ -56,6 +56,9 @@ public class AdventOfCodeController {
                 int noun = 12;
                 int verb = 2;
                 result = dayTwoService.runIntCodeProgram(input.get(0), noun, verb);
+            } else if (part == 2) {
+                int desiredOutput = 19690720;
+                result = dayTwoService.getNounVerbPairForDesiredOutput(input.get(0), desiredOutput);
             }
         }
 

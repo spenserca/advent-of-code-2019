@@ -6,6 +6,20 @@ import java.util.Arrays;
 
 @Component
 public class DayTwoService {
+    public int[] getNounVerbPairForDesiredOutput(String initialMemoryState, int desiredOutput) {
+        for (int noun = 0; noun < 100; noun++) {
+            for (int verb = 0; verb < 100; verb++) {
+                int output = runIntCodeProgram(initialMemoryState, noun, verb);
+
+                if (output == desiredOutput) {
+                    return new int[]{noun, verb};
+                }
+            }
+        }
+
+        return null;
+    }
+
     public int runIntCodeProgram(String initialMemoryState, int noun, int verb) {
         int[] addresses = Arrays.stream(initialMemoryState.split(","))
                 .mapToInt(Integer::valueOf)
