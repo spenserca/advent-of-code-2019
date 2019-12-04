@@ -24,6 +24,8 @@ public class InputResourceService {
                 return "day01.txt";
             case 2:
                 return "day02.txt";
+            case 3:
+                return "day03.txt";
             default:
                 return "";
         }
