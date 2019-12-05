@@ -2,6 +2,7 @@ package com.spenserca.adventofcode2019;
 
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
 import com.spenserca.adventofcode2019.services.DayOneService;
+import com.spenserca.adventofcode2019.services.DayThreeService;
 import com.spenserca.adventofcode2019.services.DayTwoService;
 import com.spenserca.adventofcode2019.services.InputResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,24 +17,27 @@ import java.util.List;
 public class AdventOfCodeController {
     private DayOneService dayOneService;
     private DayTwoService dayTwoService;
+    private DayThreeService dayThreeService;
     private InputResourceService inputResourceService;
 
     @Autowired
     public AdventOfCodeController(
-            DayOneService dayOneService,
-            DayTwoService dayTwoService,
-            InputResourceService inputResourceService
+        DayOneService dayOneService,
+        DayTwoService dayTwoService,
+        DayThreeService dayThreeService,
+        InputResourceService inputResourceService
     ) {
         this.dayOneService = dayOneService;
         this.dayTwoService = dayTwoService;
+        this.dayThreeService = dayThreeService;
         this.inputResourceService = inputResourceService;
     }
 
     @GetMapping(path = "/year/{year}/day/{day}/part/{part}")
     public ResponseEntity<AdventOfCodeResponse> get(
-            @PathVariable int year,
-            @PathVariable int day,
-            @PathVariable int part
+        @PathVariable int year,
+        @PathVariable int day,
+        @PathVariable int part
     ) {
         Object result = null;
         List<String> input;
@@ -59,6 +63,13 @@ public class AdventOfCodeController {
             } else if (part == 2) {
                 int desiredOutput = 19690720;
                 result = dayTwoService.getNounVerbPairForDesiredOutput(input.get(0), desiredOutput);
+            }
+        }
+        if (day == 3) {
+            if (part == 1) {
+                result = dayThreeService.getManhattanDistanceFromClosestIntersection(input);
+            } else if (part == 2) {
+                result = dayThreeService.getMinimumStepsToIntersection(input);
             }
         }
 
