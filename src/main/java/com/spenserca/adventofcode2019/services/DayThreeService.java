@@ -13,35 +13,31 @@ public class DayThreeService {
     public int getManhattanDistanceFromClosestIntersection(List<String> wires) {
         Set<SimpleEntry> wireOneCoordinates = getWirePathCoordinates(wires.get(0));
         Set<SimpleEntry> wireTwoCoordinates = getWirePathCoordinates(wires.get(1));
-        Set<SimpleEntry> commonCoordinates = new HashSet<>(wireOneCoordinates);
-        commonCoordinates.retainAll(wireTwoCoordinates);
+        wireOneCoordinates.retainAll(wireTwoCoordinates);
 
-        return commonCoordinates.stream()
-                .map((coord) -> Math.abs((int) coord.getKey()) + Math.abs((int) coord.getValue()))
+        return wireOneCoordinates.stream()
+                .map((coord) -> Math.abs((Integer) coord.getKey()) + Math.abs((Integer) coord.getValue()))
                 .min(Comparator.comparingInt(a -> a))
                 .get();
     }
 
     private Set<SimpleEntry> getWirePathCoordinates(String wire) {
         Set<SimpleEntry> coordinates = new HashSet<>();
-        SimpleEntry origin = new SimpleEntry(0, 0);
-        coordinates.add(origin);
         String[] directions = wire.split(",");
         int x = 0;
         int y = 0;
 
-        for (String d : directions) {
-            int distance = Integer.valueOf(d.substring(1));
-            char direction = d.charAt(0);
+        for (String direction : directions) {
+            int distance = Integer.valueOf(direction.substring(1));
 
             for (int i = 0; i < distance; i++) {
-                if ("R".equals(direction)) {
+                if (direction.startsWith("R")) {
                     x++;
-                } else if ("L".equals(direction)) {
+                } else if (direction.startsWith("L")) {
                     x--;
-                } else if ("U".equals(direction)) {
+                } else if (direction.startsWith("U")) {
                     y++;
-                } else if ("D".equals(direction)) {
+                } else if (direction.startsWith("D")) {
                     y--;
                 }
 
