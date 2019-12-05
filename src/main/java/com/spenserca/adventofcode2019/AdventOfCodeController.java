@@ -22,10 +22,10 @@ public class AdventOfCodeController {
 
     @Autowired
     public AdventOfCodeController(
-            DayOneService dayOneService,
-            DayTwoService dayTwoService,
-            DayThreeService dayThreeService,
-            InputResourceService inputResourceService
+        DayOneService dayOneService,
+        DayTwoService dayTwoService,
+        DayThreeService dayThreeService,
+        InputResourceService inputResourceService
     ) {
         this.dayOneService = dayOneService;
         this.dayTwoService = dayTwoService;
@@ -35,9 +35,9 @@ public class AdventOfCodeController {
 
     @GetMapping(path = "/year/{year}/day/{day}/part/{part}")
     public ResponseEntity<AdventOfCodeResponse> get(
-            @PathVariable int year,
-            @PathVariable int day,
-            @PathVariable int part
+        @PathVariable int year,
+        @PathVariable int day,
+        @PathVariable int part
     ) {
         Object result = null;
         List<String> input;
@@ -68,6 +68,8 @@ public class AdventOfCodeController {
         if (day == 3) {
             if (part == 1) {
                 result = dayThreeService.getManhattanDistanceFromClosestIntersection(input);
+            } else if (part == 2) {
+                result = dayThreeService.getMinimumStepsToIntersection(input);
             }
         }
 
