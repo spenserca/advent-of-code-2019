@@ -23,6 +23,16 @@ class DayThreeServiceTest {
     }
 
     @Test
+    public void getMinimumStepsToIntersection_CalledWithActualInput_ReturnsExpectedResult() throws IOException {
+        int expected = 15678;
+        List<String> actualInput = inputResourceService.getInputForDay(3);
+
+        int actual = underTest.getMinimumStepsToIntersection(actualInput);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
     public void getManhattanDistanceFromClosestIntersection_CalledWithInput_Returns6() {
         String wireOne = "R8,U5,L5,D3";
         String wireTwo = "U7,R6,D4,L4";
