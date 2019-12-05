@@ -2,12 +2,25 @@ package com.spenserca.adventofcode2019.services;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DayThreeServiceTest {
     private DayThreeService underTest = new DayThreeService();
+    private InputResourceService inputResourceService = new InputResourceService();
+
+    @Test
+    public void getManhattanDistanceFromClosestIntersection_CalledWithActualInput_ReturnsExpectedResult() throws IOException {
+        int expected = 399;
+        List<String> actualInput = inputResourceService.getInputForDay(3);
+
+        int actual = underTest.getManhattanDistanceFromClosestIntersection(actualInput);
+
+        assertThat(actual).isEqualTo(expected);
+    }
 
     @Test
     public void getManhattanDistanceFromClosestIntersection_CalledWithInput_Returns6() {
