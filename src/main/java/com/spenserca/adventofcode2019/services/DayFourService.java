@@ -13,6 +13,23 @@ public class DayFourService {
     }
 
     public int getCountOfValidPasswords(String range) {
-        return 0;
+        int lowerBound = Integer.parseInt(range.split("-")[0]);
+        int upperBound = Integer.parseInt(range.split("-")[1]);
+        int validPasswordsCount = 0;
+
+        for (int i = lowerBound; i <= upperBound; i++) {
+            if (isValidPassword(i)) {
+                validPasswordsCount++;
+            }
+        }
+
+        return validPasswordsCount;
+    }
+
+    private boolean isValidPassword(int i) {
+        String intAsString = String.valueOf(i);
+        return validationService.hasIncreasingValuesOnly(intAsString)
+                && validationService.isSixDigits(intAsString)
+                && validationService.hasMatchingAdjacentValues(intAsString);
     }
 }

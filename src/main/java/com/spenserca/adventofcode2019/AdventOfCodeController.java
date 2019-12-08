@@ -1,10 +1,7 @@
 package com.spenserca.adventofcode2019;
 
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
-import com.spenserca.adventofcode2019.services.DayOneService;
-import com.spenserca.adventofcode2019.services.DayThreeService;
-import com.spenserca.adventofcode2019.services.DayTwoService;
-import com.spenserca.adventofcode2019.services.InputResourceService;
+import com.spenserca.adventofcode2019.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,26 +15,29 @@ public class AdventOfCodeController {
     private DayOneService dayOneService;
     private DayTwoService dayTwoService;
     private DayThreeService dayThreeService;
+    private DayFourService dayFourService;
     private InputResourceService inputResourceService;
 
     @Autowired
     public AdventOfCodeController(
-        DayOneService dayOneService,
-        DayTwoService dayTwoService,
-        DayThreeService dayThreeService,
-        InputResourceService inputResourceService
+            DayOneService dayOneService,
+            DayTwoService dayTwoService,
+            DayThreeService dayThreeService,
+            DayFourService dayFourService,
+            InputResourceService inputResourceService
     ) {
         this.dayOneService = dayOneService;
         this.dayTwoService = dayTwoService;
         this.dayThreeService = dayThreeService;
+        this.dayFourService = dayFourService;
         this.inputResourceService = inputResourceService;
     }
 
     @GetMapping(path = "/year/{year}/day/{day}/part/{part}")
     public ResponseEntity<AdventOfCodeResponse> get(
-        @PathVariable int year,
-        @PathVariable int day,
-        @PathVariable int part
+            @PathVariable int year,
+            @PathVariable int day,
+            @PathVariable int part
     ) {
         Object result = null;
         List<String> input;
@@ -70,6 +70,11 @@ public class AdventOfCodeController {
                 result = dayThreeService.getManhattanDistanceFromClosestIntersection(input);
             } else if (part == 2) {
                 result = dayThreeService.getMinimumStepsToIntersection(input);
+            }
+        }
+        if (day == 4) {
+            if (part == 1) {
+                result = dayFourService.getCountOfValidPasswords(input.get(0));
             }
         }
 

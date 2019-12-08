@@ -30,15 +30,16 @@ public class ValidationService {
 
     public boolean hasIncreasingValuesOnly(String toValidate) {
         String[] characters = toValidate.split("");
-        boolean hasIncreasingValuesOnly = false;
 
         for (int i = 0; i < characters.length - 1; i++) {
             Integer current = Integer.parseInt(characters[i]);
             Integer next = Integer.parseInt(characters[i + 1]);
 
-            hasIncreasingValuesOnly = current <= next;
+            if (current > next) {
+                return false;
+            }
         }
 
-        return hasIncreasingValuesOnly;
+        return true;
     }
 }

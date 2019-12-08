@@ -1,9 +1,6 @@
 package com.spenserca.adventofcode2019;
 
-import com.spenserca.adventofcode2019.services.DayOneService;
-import com.spenserca.adventofcode2019.services.DayThreeService;
-import com.spenserca.adventofcode2019.services.DayTwoService;
-import com.spenserca.adventofcode2019.services.InputResourceService;
+import com.spenserca.adventofcode2019.services.*;
 import org.assertj.core.internal.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,6 +20,7 @@ class AdventOfCodeControllerTest {
     private DayOneService mockDayOneService = mock(DayOneService.class);
     private DayTwoService mockDayTwoService = mock(DayTwoService.class);
     private DayThreeService mockDayThreeService = mock(DayThreeService.class);
+    private DayFourService mockDayFourService = mock(DayFourService.class);
     private InputResourceService mockInputResourceService = mock(InputResourceService.class);
 
     @BeforeAll
@@ -36,6 +34,7 @@ class AdventOfCodeControllerTest {
                 mockDayOneService,
                 mockDayTwoService,
                 mockDayThreeService,
+                mockDayFourService,
                 mockInputResourceService
         );
     }
