@@ -4,15 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ValidationService {
-
-    public boolean isSixDigits(String toValidate) {
-        return toValidate.length() == 6;
-    }
-
-    public boolean isWithinRange(int lowerBound, int upperBound, int toValidate) {
-        return toValidate >= lowerBound && toValidate <= upperBound;
-    }
-
     public boolean hasMatchingAdjacentValues(String toValidate) {
         String[] characters = toValidate.split("");
 

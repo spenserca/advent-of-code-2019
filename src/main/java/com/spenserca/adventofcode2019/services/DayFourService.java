@@ -29,7 +29,6 @@ public class DayFourService {
     private boolean isValidPassword(int i) {
         String intAsString = String.valueOf(i);
         return validationService.hasIncreasingValuesOnly(intAsString)
-                && validationService.isSixDigits(intAsString)
                 && validationService.hasMatchingAdjacentValues(intAsString);
     }
 }
