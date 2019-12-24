@@ -75,6 +75,8 @@ public class AdventOfCodeController {
         if (day == 4) {
             if (part == 1) {
                 result = dayFourService.getCountOfValidPasswords(input.get(0));
+            } else if (part == 2) {
+                result = dayFourService.getCountOfValidPasswordsWithDouble(input.get(0));
             }
         }
 

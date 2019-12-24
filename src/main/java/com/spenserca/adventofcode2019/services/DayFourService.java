@@ -26,9 +26,29 @@ public class DayFourService {
         return validPasswordsCount;
     }
 
+    public int getCountOfValidPasswordsWithDouble(String range) {
+        int lowerBound = Integer.parseInt(range.split("-")[0]);
+        int upperBound = Integer.parseInt(range.split("-")[1]);
+        int validPasswordsCount = 0;
+
+        for (int i = lowerBound; i <= upperBound; i++) {
+            if (isValidPasswordWithDouble(i)) {
+                validPasswordsCount++;
+            }
+        }
+
+        return validPasswordsCount;
+    }
+
     private boolean isValidPassword(int i) {
         String intAsString = String.valueOf(i);
         return validationService.hasIncreasingValuesOnly(intAsString)
                 && validationService.hasMatchingAdjacentValues(intAsString);
+    }
+
+    private boolean isValidPasswordWithDouble(int i) {
+        String intAsString = String.valueOf(i);
+        return validationService.hasIncreasingValuesOnly(intAsString)
+                && validationService.hasDouble(intAsString);
     }
 }
