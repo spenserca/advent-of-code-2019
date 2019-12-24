@@ -2,21 +2,29 @@ package com.spenserca.adventofcode2019.services;
 
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+
 @Component
 public class ValidationService {
     public boolean hasMatchingAdjacentValues(String toValidate) {
         String[] characters = toValidate.split("");
+        HashMap<String, Integer> adjacentValueCounts = new HashMap<>();
 
         for (int i = 0; i < characters.length - 1; i++) {
             String current = characters[i];
             String next = characters[i + 1];
 
             if (current.equals(next)) {
-                return true;
+                if (adjacentValueCounts.containsKey(current)) {
+                    int currentCount = adjacentValueCounts.get(current);
+                    adjacentValueCounts.put(current, currentCount + 1);
+                } else {
+                    adjacentValueCounts.put(current, 1);
+                }
             }
         }
 
-        return false;
+        return !adjacentValueCounts.isEmpty();
     }
 
     public boolean hasIncreasingValuesOnly(String toValidate) {
