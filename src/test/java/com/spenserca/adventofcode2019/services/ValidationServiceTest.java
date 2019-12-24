@@ -110,4 +110,35 @@ public class ValidationServiceTest {
             assertThat(actual).isFalse();
         }
     }
+
+    @Nested
+    @DisplayName("hasDouble Tests")
+    class hasDoubleTests {
+        @Test
+        public void hasDouble_CalledWithGivenInput112233_ReturnsTrue() {
+            String input = "112233";
+
+            boolean actual = underTest.hasDouble(input);
+
+            assertThat(actual).isTrue();
+        }
+
+        @Test
+        public void hasDouble_CalledWithGivenInput123444_ReturnsFalse() {
+            String input = "123444";
+
+            boolean actual = underTest.hasDouble(input);
+
+            assertThat(actual).isFalse();
+        }
+
+        @Test
+        public void hasDouble_CalledWithGivenInput111122_ReturnsTrue() {
+            String input = "111122";
+
+            boolean actual = underTest.hasDouble(input);
+
+            assertThat(actual).isTrue();
+        }
+    }
 }
