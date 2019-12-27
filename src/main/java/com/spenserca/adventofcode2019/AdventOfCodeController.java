@@ -1,18 +1,23 @@
 package com.spenserca.adventofcode2019;
 
+import com.spenserca.adventofcode2019.days.DayOne;
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
-import com.spenserca.adventofcode2019.services.*;
+import com.spenserca.adventofcode2019.services.DayFourService;
+import com.spenserca.adventofcode2019.services.DayThreeService;
+import com.spenserca.adventofcode2019.services.DayTwoService;
+import com.spenserca.adventofcode2019.services.InputResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
 public class AdventOfCodeController {
-    private DayOneService dayOneService;
+    private DayOne dayOne;
     private DayTwoService dayTwoService;
     private DayThreeService dayThreeService;
     private DayFourService dayFourService;
@@ -20,13 +25,13 @@ public class AdventOfCodeController {
 
     @Autowired
     public AdventOfCodeController(
-            DayOneService dayOneService,
-            DayTwoService dayTwoService,
-            DayThreeService dayThreeService,
-            DayFourService dayFourService,
-            InputResourceService inputResourceService
+        DayOne dayOne,
+        DayTwoService dayTwoService,
+        DayThreeService dayThreeService,
+        DayFourService dayFourService,
+        InputResourceService inputResourceService
     ) {
-        this.dayOneService = dayOneService;
+        this.dayOne = dayOne;
         this.dayTwoService = dayTwoService;
         this.dayThreeService = dayThreeService;
         this.dayFourService = dayFourService;
@@ -35,10 +40,10 @@ public class AdventOfCodeController {
 
     @GetMapping(path = "/year/{year}/day/{day}/part/{part}")
     public ResponseEntity<AdventOfCodeResponse> get(
-            @PathVariable int year,
-            @PathVariable int day,
-            @PathVariable int part
-    ) {
+        @PathVariable int year,
+        @PathVariable int day,
+        @PathVariable int part
+    ) throws IOException {
         Object result = null;
         List<String> input;
 
@@ -50,9 +55,9 @@ public class AdventOfCodeController {
 
         if (day == 1) {
             if (part == 1) {
-                result = dayOneService.calculateFuelRequirement(input);
+                result = dayOne.partOne();
             } else if (part == 2) {
-                result = dayOneService.recursivelyCalculateFuelRequirement(input);
+                result = dayOne.partTwo();
             }
         }
         if (day == 2) {
