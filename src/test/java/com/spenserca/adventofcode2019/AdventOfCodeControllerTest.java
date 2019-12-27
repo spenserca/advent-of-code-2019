@@ -1,10 +1,10 @@
 package com.spenserca.adventofcode2019;
 
 import com.spenserca.adventofcode2019.days.DayOne;
+import com.spenserca.adventofcode2019.days.DayThree;
 import com.spenserca.adventofcode2019.days.DayTwo;
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
 import com.spenserca.adventofcode2019.services.DayFourService;
-import com.spenserca.adventofcode2019.services.DayThreeService;
 import com.spenserca.adventofcode2019.services.InputResourceService;
 import org.assertj.core.internal.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.*;
@@ -24,7 +24,7 @@ public class AdventOfCodeControllerTest {
     private AdventOfCodeController underTest;
     private DayOne mockDayOne = mock(DayOne.class);
     private DayTwo mockDayTwo = mock(DayTwo.class);
-    private DayThreeService mockDayThreeService = mock(DayThreeService.class);
+    private DayThree mockDayThree = mock(DayThree.class);
     private DayFourService mockDayFourService = mock(DayFourService.class);
     private InputResourceService mockInputResourceService = mock(InputResourceService.class);
 
@@ -34,13 +34,15 @@ public class AdventOfCodeControllerTest {
         when(mockDayOne.partTwo()).thenReturn(new Random().nextInt());
         when(mockDayTwo.partOne()).thenReturn(new Random().nextInt());
         when(mockDayTwo.partTwo()).thenReturn(new int[]{new Random().nextInt()});
+        when(mockDayThree.partOne()).thenReturn(new Random().nextInt());
+        when(mockDayThree.partTwo()).thenReturn(new Random().nextInt());
         when(mockInputResourceService.getInputForDay(anyInt()))
                 .thenReturn(Collections.singletonList(RandomString.make(8)));
 
         underTest = new AdventOfCodeController(
                 mockDayOne,
                 mockDayTwo,
-                mockDayThreeService,
+                mockDayThree,
                 mockDayFourService,
                 mockInputResourceService
         );
@@ -155,6 +157,66 @@ public class AdventOfCodeControllerTest {
             int expectedPart = 2;
             int expectedResult = new Random().nextInt();
             when(mockDayOne.partTwo()).thenReturn(expectedResult);
+
+            ResponseEntity<AdventOfCodeResponse> response = underTest.get(expectedYear, expectedDay, expectedPart);
+
+            AdventOfCodeResponse actual = response.getBody();
+            assertThat(actual.getYear()).isEqualTo(expectedYear);
+            assertThat(actual.getDay()).isEqualTo(expectedDay);
+            assertThat(actual.getPart()).isEqualTo(expectedPart);
+            assertThat(actual.getResult()).isEqualTo(expectedResult);
+        }
+    }
+
+    @Nested
+    @DisplayName("Day Three Part One Tests")
+    class dayThreePartOneTests {
+        @Test
+        @DisplayName("calls dayThree.partOne")
+        public void get_CalledWithPart1_CallsExpected() throws IOException {
+            underTest.get(new Random().nextInt(), 3, 1);
+
+            verify(mockDayThree).partOne();
+        }
+
+        @Test
+        @DisplayName("returns the expected value")
+        public void get_Called_ReturnsExpectedValue() throws IOException {
+            int expectedYear = new Random().nextInt();
+            int expectedDay = 3;
+            int expectedPart = 1;
+            int expectedResult = new Random().nextInt();
+            when(mockDayThree.partOne()).thenReturn(expectedResult);
+
+            ResponseEntity<AdventOfCodeResponse> response = underTest.get(expectedYear, expectedDay, expectedPart);
+
+            AdventOfCodeResponse actual = response.getBody();
+            assertThat(actual.getYear()).isEqualTo(expectedYear);
+            assertThat(actual.getDay()).isEqualTo(expectedDay);
+            assertThat(actual.getPart()).isEqualTo(expectedPart);
+            assertThat(actual.getResult()).isEqualTo(expectedResult);
+        }
+    }
+
+    @Nested
+    @DisplayName("Day Three Part Two Tests")
+    class dayThreePartTwoTests {
+        @Test
+        @DisplayName("calls dayThree.partTwo")
+        public void get_CalledWithPart2_CallsExpected() throws IOException {
+            underTest.get(new Random().nextInt(), 3, 2);
+
+            verify(mockDayThree).partTwo();
+        }
+
+        @Test
+        @DisplayName("returns the expected value")
+        public void get_Called_ReturnsExpectedValue() throws IOException {
+            int expectedYear = new Random().nextInt();
+            int expectedDay = 3;
+            int expectedPart = 2;
+            int expectedResult = new Random().nextInt();
+            when(mockDayThree.partTwo()).thenReturn(expectedResult);
 
             ResponseEntity<AdventOfCodeResponse> response = underTest.get(expectedYear, expectedDay, expectedPart);
 

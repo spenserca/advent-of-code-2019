@@ -1,10 +1,10 @@
 package com.spenserca.adventofcode2019;
 
 import com.spenserca.adventofcode2019.days.DayOne;
+import com.spenserca.adventofcode2019.days.DayThree;
 import com.spenserca.adventofcode2019.days.DayTwo;
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
 import com.spenserca.adventofcode2019.services.DayFourService;
-import com.spenserca.adventofcode2019.services.DayThreeService;
 import com.spenserca.adventofcode2019.services.InputResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.List;
 public class AdventOfCodeController {
     private DayOne dayOne;
     private DayTwo dayTwo;
-    private DayThreeService dayThreeService;
+    private DayThree dayThree;
     private DayFourService dayFourService;
     private InputResourceService inputResourceService;
 
@@ -27,13 +27,13 @@ public class AdventOfCodeController {
     public AdventOfCodeController(
             DayOne dayOne,
             DayTwo dayTwo,
-            DayThreeService dayThreeService,
+            DayThree dayThree,
             DayFourService dayFourService,
             InputResourceService inputResourceService
     ) {
         this.dayOne = dayOne;
         this.dayTwo = dayTwo;
-        this.dayThreeService = dayThreeService;
+        this.dayThree = dayThree;
         this.dayFourService = dayFourService;
         this.inputResourceService = inputResourceService;
     }
@@ -69,9 +69,9 @@ public class AdventOfCodeController {
         }
         if (day == 3) {
             if (part == 1) {
-                result = dayThreeService.getManhattanDistanceFromClosestIntersection(input);
+                result = dayThree.partOne();
             } else if (part == 2) {
-                result = dayThreeService.getMinimumStepsToIntersection(input);
+                result = dayThree.partTwo();
             }
         }
         if (day == 4) {
