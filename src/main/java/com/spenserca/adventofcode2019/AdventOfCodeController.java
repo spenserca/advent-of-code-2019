@@ -1,10 +1,10 @@
 package com.spenserca.adventofcode2019;
 
 import com.spenserca.adventofcode2019.days.DayOne;
+import com.spenserca.adventofcode2019.days.DayTwo;
 import com.spenserca.adventofcode2019.models.AdventOfCodeResponse;
 import com.spenserca.adventofcode2019.services.DayFourService;
 import com.spenserca.adventofcode2019.services.DayThreeService;
-import com.spenserca.adventofcode2019.services.DayTwoService;
 import com.spenserca.adventofcode2019.services.InputResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,21 +18,21 @@ import java.util.List;
 @RestController
 public class AdventOfCodeController {
     private DayOne dayOne;
-    private DayTwoService dayTwoService;
+    private DayTwo dayTwo;
     private DayThreeService dayThreeService;
     private DayFourService dayFourService;
     private InputResourceService inputResourceService;
 
     @Autowired
     public AdventOfCodeController(
-        DayOne dayOne,
-        DayTwoService dayTwoService,
-        DayThreeService dayThreeService,
-        DayFourService dayFourService,
-        InputResourceService inputResourceService
+            DayOne dayOne,
+            DayTwo dayTwo,
+            DayThreeService dayThreeService,
+            DayFourService dayFourService,
+            InputResourceService inputResourceService
     ) {
         this.dayOne = dayOne;
-        this.dayTwoService = dayTwoService;
+        this.dayTwo = dayTwo;
         this.dayThreeService = dayThreeService;
         this.dayFourService = dayFourService;
         this.inputResourceService = inputResourceService;
@@ -40,9 +40,9 @@ public class AdventOfCodeController {
 
     @GetMapping(path = "/year/{year}/day/{day}/part/{part}")
     public ResponseEntity<AdventOfCodeResponse> get(
-        @PathVariable int year,
-        @PathVariable int day,
-        @PathVariable int part
+            @PathVariable int year,
+            @PathVariable int day,
+            @PathVariable int part
     ) throws IOException {
         Object result = null;
         List<String> input;
@@ -50,7 +50,7 @@ public class AdventOfCodeController {
         try {
             input = inputResourceService.getInputForDay(day);
         } catch (Exception e) {
-            throw new RuntimeException("Error getting input for /year" + year + "/day/" + day + "/part/" + part);
+            throw new RuntimeException("Error getting input for /year/" + year + "/day/" + day + "/part/" + part);
         }
 
         if (day == 1) {
@@ -62,12 +62,9 @@ public class AdventOfCodeController {
         }
         if (day == 2) {
             if (part == 1) {
-                int noun = 12;
-                int verb = 2;
-                result = dayTwoService.runIntCodeProgram(input.get(0), noun, verb);
+                result = dayTwo.partOne();
             } else if (part == 2) {
-                int desiredOutput = 19690720;
-                result = dayTwoService.getNounVerbPairForDesiredOutput(input.get(0), desiredOutput);
+                result = dayTwo.partTwo();
             }
         }
         if (day == 3) {
